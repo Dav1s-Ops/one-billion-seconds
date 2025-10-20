@@ -8,20 +8,24 @@ let lastSeconds = 0;
 
 export const getSecondsAlive = () => Math.floor((Date.now() - birthDate.getTime()) / 1000);
 
-export const formatNumber = (num) => num.toString().padStart(10, '0');
+export const formatNumber = (num) => {
+  const plain = num.toString().padStart(12, '0');
+  return plain.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
 
 export function initCounter() {
   const currentSeconds = getSecondsAlive();
-  const digits = formatNumber(currentSeconds).split('');
+  const formatted = formatNumber(currentSeconds);
   let html = '';
-  for (let i = 0; i < 10; i++) {
-    if (i > 0 && i % 3 === 1) {
+  formatted.split('').forEach(char => {
+    if (char === ',') {
       html += '<span class="comma">,</span>';
+    } else {
+      html += `<span class="digit">${char}</span>`;
     }
-    html += `<span class="digit">${digits[i]}</span>`;
-  }
+  });
   counterElement.innerHTML = html;
-  previousDigits = digits;
+  previousDigits = formatted.replace(/,/g, '').split('');
   lastSeconds = currentSeconds;
   updateMilestones(currentSeconds);
   updateProgress(currentSeconds);
@@ -29,7 +33,8 @@ export function initCounter() {
 
 export function updateCounter() {
   const currentSeconds = getSecondsAlive();
-  const digits = formatNumber(currentSeconds).split('');
+  const plain = currentSeconds.toString().padStart(12, '0');
+  const digits = plain.split('');
   const digitElements = document.querySelectorAll('.digit');
 
   digits.forEach((digit, index) => {
