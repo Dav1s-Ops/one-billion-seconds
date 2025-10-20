@@ -1,8 +1,7 @@
 export const milestones = [
-  { seconds: 100000000, descElement: document.querySelectorAll('.seconds-desc')[0].parentNode },
-  { seconds: 1000000000, descElement: document.querySelectorAll('.seconds-desc')[1].parentNode },
-  { seconds: 2000000000, descElement: document.querySelectorAll('.seconds-desc')[2].parentNode },
-  { seconds: 3000000000, descElement: document.querySelectorAll('.seconds-desc')[3].parentNode }
+  { seconds: 1000000000, descElement: document.querySelectorAll('.seconds-desc')[0].parentNode },
+  { seconds: 2000000000, descElement: document.querySelectorAll('.seconds-desc')[1].parentNode },
+  { seconds: 3000000000, descElement: document.querySelectorAll('.seconds-desc')[2].parentNode }
 ];
 
 export function updateMilestones(currentSeconds) {
