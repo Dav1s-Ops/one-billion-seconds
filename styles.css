@@ -97,9 +97,17 @@ h1 {
 }
 
 #celebrate-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
   margin-top: 1rem;
-  font-size: 0.9rem;
   color: #ffffff;
+}
+
+#celebrate-count .label {
+  margin-right: 0.5rem;
 }
 
 .appreciation {
@@ -139,5 +147,9 @@ h1 {
     font-family: monospace, sans-serif;
     padding: 8px 16px;
     font-size: 0.9rem;
+  }
+
+  #celebrate-count {
+    font-size: 1.2rem;
   }
 }

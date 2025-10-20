@@ -9,13 +9,23 @@ async function init() {
     const response = await fetch('/api/celebrate');
     if (response.ok) {
       const { count } = await response.json();
-      document.getElementById('celebrate-count').textContent = `Celebrated ${count} times!`;
+      updateCelebrateCount(count);
     }
   } catch (error) {
     console.error('Failed to fetch initial count:', error);
   }
 
   setInterval(updateCounter, 1000);
+}
+
+function updateCelebrateCount(count) {
+  const celebrateElement = document.getElementById('celebrate-count');
+  const padded = count.toString().padStart(6, '0');
+  let html = '';
+  padded.split('').forEach(digit => {
+    html += `<span class="digit">${digit}</span>`;
+  });
+  celebrateElement.innerHTML = html;
 }
 
 init();

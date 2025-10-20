@@ -38,12 +38,11 @@ export function initConfetti() {
       startVelocity: 45,
     });
 
-    // Increment and update count
     try {
       const response = await fetch('/api/celebrate', { method: 'POST' });
       if (response.ok) {
         const { count } = await response.json();
-        document.getElementById('celebrate-count').textContent = `Celebrated ${count} times!`;
+        updateCelebrateCount(count);
       }
     } catch (error) {
       console.error('Failed to increment count:', error);
