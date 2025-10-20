@@ -1,31 +1,48 @@
 import { initCounter, updateCounter } from './js/counter.js';
-import { initConfetti } from './js/confetti.js';
+import { fireConfetti } from './js/confetti.js';
+import { initCelebrateCounter, updateCelebrateCounter } from './js/celebrate_counter.js';
 
 async function init() {
   initCounter();
-  initConfetti();
+
+  let currentCount = 0;
 
   try {
     const response = await fetch('/api/celebrate');
     if (response.ok) {
       const { count } = await response.json();
-      updateCelebrateCount(count);
+      currentCount = count;
+      initCelebrateCounter(currentCount);
     }
   } catch (error) {
     console.error('Failed to fetch initial count:', error);
   }
 
   setInterval(updateCounter, 1000);
-}
 
-function updateCelebrateCount(count) {
-  const celebrateElement = document.getElementById('celebrate-count');
-  const padded = count.toString().padStart(6, '0');
-  let html = '';
-  padded.split('').forEach(digit => {
-    html += `<span class="digit">${digit}</span>`;
+  const confettiBtn = document.getElementById('confetti-btn');
+  confettiBtn.addEventListener('click', () => {
+    currentCount++;
+    updateCelebrateCounter(currentCount);
+    fireConfetti();
+
+    fetch('/api/celebrate', { method: 'POST' })
+      .then(response => {
+        if (response.ok) {
+          return response.json().then(({ count }) => {
+            currentCount = Math.max(currentCount, count);
+            updateCelebrateCounter(currentCount);
+          });
+        } else {
+          throw new Error('Response not OK');
+        }
+      })
+      .catch(error => {
+        console.error('Failed to increment:', error);
+        currentCount--;
+        updateCelebrateCounter(currentCount);
+      });
   });
-  celebrateElement.innerHTML = html;
 }
 
 init();
