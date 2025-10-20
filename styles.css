@@ -27,7 +27,7 @@ h1 {
   letter-spacing: 0.1rem;
   flex-wrap: wrap;
   gap: 0.25rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .digit {
@@ -99,7 +99,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1rem;
   margin-top: 1rem;
   color: #ffffff;
@@ -110,7 +110,7 @@ h1 {
 }
 
 .appreciation {
-  margin-top: 2rem;
+  margin-top: 1rem;
   line-height: 1.5rem;
   word-wrap: break-word;
   font-size: 0.8rem;
@@ -146,9 +146,14 @@ h1 {
     font-family: monospace, sans-serif;
     padding: 8px 16px;
     font-size: 0.9rem;
+    margin-top: 2rem;
   }
 
   #celebrate-count {
-    font-size: 1.2rem;
+    font-size: 1rem;
+  }
+
+  .appreciation {
+    font-size: 0.7rem;
   }
 }
