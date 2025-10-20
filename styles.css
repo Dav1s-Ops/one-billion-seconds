@@ -91,9 +91,8 @@ h1 {
 }
 
 #confetti-btn:hover {
-  background-color: #45a049;
-  color: white;
-  transition: background-color 0.4s ease-in-out;
+  background-color: #72a925;
+  transition: background-color 0.3s ease-in-out;
 }
 
 #celebrate-count {
