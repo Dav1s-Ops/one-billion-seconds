@@ -12,7 +12,7 @@ export function initCelebrateCounter(count) {
   previousCelebrateDigits = formatted.split('');
 }
 
-export function updateCelebrateCounter(count) {
+export function updateCelebrateCounter(count, animDuration = 0.6) {
   const formatted = formatCelebrateNumber(count);
   const digits = formatted.split('');
   const digitElements = document.getElementById('celebrate-count').querySelectorAll('.digit');
@@ -20,10 +20,12 @@ export function updateCelebrateCounter(count) {
   digits.forEach((digit, index) => {
     if (digit !== previousCelebrateDigits[index]) {
       const el = digitElements[index];
+      const dur1 = animDuration * (0.2 / 0.6);
+      const dur2 = animDuration * (0.4 / 0.6);
       gsap.to(el, {
         y: -20,
         opacity: 0,
-        duration: 0.2,
+        duration: dur1,
         onComplete: () => {
           el.textContent = digit;
           gsap.set(el, { y: 20, opacity: 0, scaleY: 0 });
@@ -31,7 +33,7 @@ export function updateCelebrateCounter(count) {
             y: 0,
             opacity: 1,
             scaleY: 1,
-            duration: 0.4,
+            duration: dur2,
             ease: 'power2.out',
           });
         },
